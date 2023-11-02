@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class RegistroReproducao extends Model {
+class Registro extends Model {
     use HasFactory;
 
     // Definindo a relação, indicando que um registro de reprodução pertence a uma vaca

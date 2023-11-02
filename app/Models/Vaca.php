@@ -15,9 +15,9 @@ class Vaca extends Model {
         'raca',
     ];
 
-    // Definindo a relação um-para-muitos com os registros de reprodução
-    public function RegistroReproducao() {
-        return $this->hasMany(RegistroReproducao::class);
+    // Definindo a relação um-para-muitos com os registros
+    public function Registro() {
+        return $this->hasMany(Registro::class);
     }
 
 }

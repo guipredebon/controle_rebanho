@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VacasController;
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\EventosController;
 
 
 Route::get('/', function () {
@@ -24,4 +25,12 @@ Route::put('/vacas/{vaca}', [VacasController::class, 'update'])->name('vacas.upd
 Route::delete('/vacas/{vaca}', [VacasController::class, 'destroy'])->name('vacas.destroy');
 
 Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda.index');
+
+Route::get('/eventos', [EventosController::class, 'index'])->name('eventos.index');
+Route::get('/eventos/create', [EventosController::class, 'create'])->name('eventos.create');
+Route::post('/eventos', [EventosController::class, 'store'])->name('eventos.store');
+Route::get('/eventos/{evento}', [EventosController::class, 'show'])->name('eventos.show');
+Route::get('/eventos/{evento}/edit', [EventosController::class, 'edit'])->name('eventos.edit');
+Route::put('/eventos/{evento}', [EventosController::class, 'update'])->name('eventos.update');
+Route::delete('/eventos/{evento}', [EventosController::class, 'destroy'])->name('eventos.destroy');
 

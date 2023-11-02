@@ -7,22 +7,19 @@ use Illuminate\Http\Request;
 
 class VacasController extends Controller {
 
-    // Cria um método que lista todas as Vacas do banco de dados.
-
+    // Lista todas as Vacas do banco de dados e exibe em uma view.
     public function index() {
         $vacas = Vaca::all(); // Recupera todas as vacas do banco de dados.
         return view('vacas.index', ['vacas' => $vacas]);
     }
 
-    // Exibe um formulário para criar um novo registro
-
+    // Exibe um formulário para criar uma nova vaca.
     public function create() {
         return view('vacas.create');
     }
 
 
-    // Cria uma nova instância de "Vaca"
-
+    //  Lida com a criação de uma nova Vaca com base nos dados enviados do formulário.
     public function store(Request $request) {
         $validatedData = $request->validate([
             'nro_identificacao' => 'required',
@@ -36,8 +33,7 @@ class VacasController extends Controller {
         return redirect()->route('vacas.index')->with('success', 'Vaca criada com sucesso!');
     }
 
-    //Exibe os detalhes de um registro específico
-
+    // Exibe os detalhes de uma Vaca específica.
     public function show($id) {
         $vaca = Vaca::find($id);
 
@@ -50,8 +46,7 @@ class VacasController extends Controller {
     }
 
 
-    //Exibe um formulário pré-preenchido para editar um registro existente
-
+    // Exibe um formulário pré-preenchido para editar uma Vaca existente.
     public function edit($id) {
         $vaca = Vaca::find($id);
 
@@ -63,9 +58,7 @@ class VacasController extends Controller {
         return view('vacas.edit', compact('vaca'));
     }
 
-
-    // Atualiza os dados de uma vaca existente com base em seu ID.
-     
+    //  Lida com a atualização dos dados de uma Vaca existente com base no ID e nos dados enviados do formulário.
     public function update(Request $request, Vaca $vaca) {
         $request->validate([
             'nro_identificacao' => 'required',
@@ -86,8 +79,7 @@ class VacasController extends Controller {
     }
 
 
-    // Remove uma vaca com base em seu ID.
-
+    // Remove uma Vaca com base em seu ID.
     public function destroy(Vaca $vaca) {
         $vaca->delete();
         return redirect('/vacas');
