@@ -29,7 +29,7 @@ class EventosController extends Controller {
 
     public function update(Request $request, Evento $evento) {
         $validatedData = $request->validate([
-            'tipo_evento' => 'required|in:Vacinação,Cio,Inseminação,Retorno de cio,Aborto,Secagem,Parto,Falecimento',
+            'tipo_evento' => 'required|unique:eventos,tipo_evento',
             // Adicione validações para outros campos, se necessário
         ]);
 

@@ -20,9 +20,9 @@
             <tr>
                 <td>{{ $evento->tipo_evento }}</td>
                 <td>
-                    <a href="{{ route('eventos.edit', $evento->id) }}" class="btn btn-sm btn-secondary">
+                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#editModal-{{ $evento->id }}" data-evento="{{ json_encode($evento) }}">
                         <i class="fas fa-pencil-alt"></i>
-                    </a>
+                    </button>
                     <form action="{{ route('eventos.destroy', $evento->id) }}" method="POST" class="d-inline" data-evento-form="{{ $evento->id }}">
                         @csrf
                         @method('DELETE')
@@ -36,6 +36,33 @@
         </tbody>
     </table>
 </div>
+
+<!-- Modal de edição (um para cada evento) -->
+@foreach($eventos as $evento)
+<div class="modal fade" id="editModal-{{ $evento->id }}" tabindex="-1" role="dialog" aria-labelledby="editModalLabel-{{ $evento->id }}" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel-{{ $evento->id }}">Editar Tipo de Evento</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="{{ route('eventos.update', $evento->id) }}" method="POST" id="editForm-{{ $evento->id }}">
+                    @csrf
+                    @method('PUT')
+                    <div class="form-group">
+                        <label for="tipo_evento">Nome do Tipo de Evento</label>
+                        <input type="text" class="form-control" id="tipo_evento-{{ $evento->id }}" name="tipo_evento" value="{{ $evento->tipo_evento }}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@endforeach
 
 <script src="{{ asset('js/eventos.js') }}"></script>
 @endsection
