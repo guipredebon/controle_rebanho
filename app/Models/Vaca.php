@@ -15,9 +15,8 @@ class Vaca extends Model {
         'raca',
     ];
 
-    // Definindo a relação um-para-muitos com os registros
-    public function Registro() {
-        return $this->hasMany(Registro::class);
+    // Permite acessar todos os eventos relacionados a uma vaca específica.
+    public function eventos() {
+        return $this->hasMany(Evento::class, 'animal_id');
     }
-
 }
