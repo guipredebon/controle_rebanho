@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\VacasController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\TipoEventoController;
-
+use App\Http\Controllers\EventoController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -25,6 +25,7 @@ Route::put('/vacas/{vaca}', [VacasController::class, 'update'])->name('vacas.upd
 Route::delete('/vacas/{vaca}', [VacasController::class, 'destroy'])->name('vacas.destroy');
 
 Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda.index');
+Route::post('/salvarEvento', [AgendaController::class, 'salvarEvento']);
 
 Route::get('/tipos_evento', [TipoEventoController::class, 'index'])->name('tipos_evento.index');
 Route::get('/tipos_evento/create', [TipoEventoController::class, 'create'])->name('tipos_evento.create');
@@ -33,4 +34,10 @@ Route::get('/tipos_evento/{tipoEvento}', [TipoEventoController::class, 'show'])-
 Route::get('/tipos_evento/{tipoEvento}/edit', [TipoEventoController::class, 'edit'])->name('tipos_evento.edit');
 Route::put('/tipos_evento/{tipoEvento}', [TipoEventoController::class, 'update'])->name('tipos_evento.update');
 Route::delete('/tipos_evento/{tipoEvento}', [TipoEventoController::class, 'destroy'])->name('tipos_evento.destroy');
+
+Route::get('/opcoes/vacas', [EventoController::class, 'opcoesVacas']);
+Route::get('/opcoes/tipo-evento', [EventoController::class, 'opcoesTipoEvento']);
+
+
+
 

@@ -14,6 +14,7 @@ class TipoEvento extends Model {
         'tipo_evento',
     ];
 
+    // Permite acessar todos os eventos relacionados a um tipo de evento específico.
     public function eventos() {
         return $this->hasMany(Evento::class, 'tipo_evento_id');
     }
