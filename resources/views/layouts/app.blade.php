@@ -31,7 +31,7 @@
                         <a class="nav-link" href="/relatorios">Relatórios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="/eventos">Tipos de Eventos</a>
+                        <a class="nav-link" href="/tipos_evento">Tipos de Eventos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/empresa">Empresa</a>
