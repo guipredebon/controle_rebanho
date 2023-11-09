@@ -6,6 +6,8 @@
         <div id="calendar"></div>
 
         @include('modals.modal_evento')
+        @include('modals.detalhes')
+
     </div>
 
     <script src="{{ asset('js/calendar.js') }}"></script>

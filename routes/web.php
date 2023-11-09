@@ -26,6 +26,8 @@ Route::delete('/vacas/{vaca}', [VacasController::class, 'destroy'])->name('vacas
 
 Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda.index');
 Route::post('/salvarEvento', [AgendaController::class, 'salvarEvento']);
+Route::get('/eventos', [AgendaController::class, 'getEventos']);
+
 
 Route::get('/tipos_evento', [TipoEventoController::class, 'index'])->name('tipos_evento.index');
 Route::get('/tipos_evento/create', [TipoEventoController::class, 'create'])->name('tipos_evento.create');

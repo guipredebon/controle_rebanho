@@ -9,36 +9,66 @@ document.addEventListener('DOMContentLoaded', function () {
             center: 'title',
             right: 'dayGridMonth,timeGridWeek,timeGridDay,list'
         },
-        // Adicionar mais configurações e eventos conforme necessário
-        events: [
-            // Exemplo de evento 
 
-            {
-                title: 'Secagem - Estrela',
-                start: '2023-10-06',
-            },
-            {
-                title: 'Retorno de Cio - Mimosa',
-                start: '2023-10-10',
-            },
-            {
-                title: 'Vacinação Rebanho',
-                start: '2023-10-19',
-            },
-            {
-                title: 'Cio Pós Parto - Malhada',
-                start: '2023-10-25',
-            },
-            // Adicione mais eventos conforme necessário
-        ],
+        events: '/eventos', // Rota para obter eventos dinamicamente
+
         dateClick: function (info) {
             abrirModalCriacaoEvento(info.dateStr);
+        },
+
+        eventContent: function (info) {
+            var title = info.event.title;
+            var vaca = info.event.extendedProps.vaca;
+            var tooltipText = 'Tipo de Evento: ' + title + '<br>Vaca: ' + vaca;
+
+            var content = document.createElement('div');
+            content.innerHTML = tooltipText;
+
+            var tooltip = new bootstrap.Tooltip(content, {
+                trigger: 'hover',
+                placement: 'top',
+                container: 'body',
+                html: true
+            });
+
+            return { domNodes: [content] };
+        },
+
+        eventClick: function (info) {
+            // Abra um modal ou outra interface para mostrar os detalhes do evento.
+            var event = info.event;
+            var modal = new bootstrap.Modal(document.getElementById('detalhesModal'));
+            modal.show();
+
+            // Preencha o modal com informações do evento (title, data, vaca, etc.).
+            document.getElementById('modalTitle').innerText = event.title;
+            document.getElementById('modalData').innerText = event.start.toLocaleString();
+            // Outras informações do evento podem ser preenchidas aqui.
+
+            // Obtenha referências aos botões de edição e exclusão
+            var editarEventoButton = document.getElementById('editarEvento');
+            var excluirEventoButton = document.getElementById('excluirEvento');
+
+            if (editarEventoButton && excluirEventoButton) {
+                editarEventoButton.addEventListener('click', function () {
+                    // Lide com a ação de edição do evento aqui.
+                    // Certifique-se de passar o ID do evento para a página de edição.
+                });
+
+                excluirEventoButton.addEventListener('click', function () {
+                    // Lide com a ação de exclusão do evento aqui.
+                    // Certifique-se de passar o ID do evento a ser excluído.
+                });
+            }
         }
+
+
+
     });
 
     calendar.render();
 
-    function abrirModalCriacaoEvento(dataSelecionada ) {
+    function abrirModalCriacaoEvento(dataSelecionada) {
         var modalEvento = new bootstrap.Modal(document.getElementById('eventoModal'));
         modalEvento.show();
 
@@ -48,7 +78,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 
-    $(document).ready(function() {
+    $(document).ready(function () {
 
         carregarOpcoesVacas();
         carregarOpcoesTipoEvento();
@@ -58,14 +88,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        
+
         $("#salvarEvento").on("click", salvarEvento);
 
         function carregarOpcoesVacas() {
-            $.get('/opcoes/vacas', function(data) {
+            $.get('/opcoes/vacas', function (data) {
                 var vacaSelect = $('#vacaSelect');
                 vacaSelect.empty();
-                data.forEach(function(vaca) {
+                data.forEach(function (vaca) {
                     vacaSelect.append($('<option>', {
                         value: vaca.id,
                         text: vaca.nome
@@ -75,10 +105,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         function carregarOpcoesTipoEvento() {
-            $.get('/opcoes/tipo-evento', function(data) {
+            $.get('/opcoes/tipo-evento', function (data) {
                 var tipoEventoSelect = $('#tipoEventoSelect');
                 tipoEventoSelect.empty();
-                data.forEach(function(tipoEvento) {
+                data.forEach(function (tipoEvento) {
                     tipoEventoSelect.append($('<option>', {
                         value: tipoEvento.id,
                         text: tipoEvento.tipo_evento
@@ -86,7 +116,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             });
         }
-    
+
         function salvarEvento() {
             const data = $("#dataInput").val();
             const vacaId = $("#vacaSelect").val();
@@ -100,10 +130,14 @@ document.addEventListener('DOMContentLoaded', function () {
                 observacoes: observacoes
             };
 
-            $.post("/salvarEvento", evento, function(response) {
+            $.post("/salvarEvento", evento, function (response) {
                 alert("Evento salvo com sucesso!");
+                var modalEvento = new bootstrap.Modal(document.getElementById('eventoModal'));
+                modalEvento.hide();
+                location.reload();
             });
         }
+
     });
 
 });

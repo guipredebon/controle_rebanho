@@ -1,4 +1,4 @@
-<!-- Button para abrir o modal -->
+
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventoModal">
     Criar Evento
   </button>
@@ -14,18 +14,16 @@
           </button>
         </div>
         <div class="modal-body">
-          <!-- Formulário para criar um novo evento -->
           <form id="eventoForm">
             <div class="form-group">
               <label for="vacaSelect">Selecione a Vaca</label>
               <select class="form-control" id="vacaSelect" name="vaca_id">
-                <!-- Inclua as opções para selecionar a vaca -->
+
               </select>
             </div>
             <div class="form-group">
               <label for="tipoEventoSelect">Selecione o Tipo de Evento</label>
               <select class="form-control" id="tipoEventoSelect" name="tipo_evento_id">
-                <!-- Inclua as opções para selecionar o tipo de evento -->
               </select>
             </div>
             <div class="form-group">
