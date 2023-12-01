@@ -1,7 +1,7 @@
 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#eventoModal">
     Criar Evento
-  </button>
+</button>
   
   <!-- Modal de Criação de Evento -->
   <div class="modal fade" id="eventoModal" tabindex="-1" role="dialog" aria-labelledby="eventoModalLabel" aria-hidden="true">

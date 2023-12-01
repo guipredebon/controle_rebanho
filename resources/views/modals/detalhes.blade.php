@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 <p>Data: <span id="modalData"></span></p>
-                <!-- Outras informações do evento podem ser exibidas aqui. -->
+                <!-- Completar -->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="editarEvento">

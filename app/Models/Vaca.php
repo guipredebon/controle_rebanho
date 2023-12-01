@@ -13,6 +13,7 @@ class Vaca extends Model {
         'nome',
         'data_nascimento',
         'raca',
+        'groupo',
     ];
 
     // Permite acessar todos os eventos relacionados a uma vaca específica.

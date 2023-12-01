@@ -5,6 +5,7 @@ use App\Http\Controllers\VacasController;
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\TipoEventoController;
 use App\Http\Controllers\EventoController;
+use App\Http\Controllers\LoginController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -39,6 +40,11 @@ Route::delete('/tipos_evento/{tipoEvento}', [TipoEventoController::class, 'destr
 
 Route::get('/opcoes/vacas', [EventoController::class, 'opcoesVacas']);
 Route::get('/opcoes/tipo-evento', [EventoController::class, 'opcoesTipoEvento']);
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
 
 
 

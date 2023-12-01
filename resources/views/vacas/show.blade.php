@@ -25,6 +25,5 @@
         </div>
     </div>
 
-    <!-- Restante do conteúdo da página -->
 </div>
 @endsection

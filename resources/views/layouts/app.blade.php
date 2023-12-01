@@ -30,34 +30,45 @@
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container">
-            <a class="navbar-brand" href="/">AgroCiclo</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav">
-                <li class="nav-item">
-                    <li>
-                        <a class="nav-link" href="/agenda">Agenda</a>
-                    </li>
+    @auth
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container">
+                <a class="navbar-brand" href="/">AgroCiclo</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="/vacas">Vacas</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/relatorios">Relatórios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/tipos_evento">Tipos de Eventos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/empresa">Empresa</a>
-                    </li>
-                </ul>
+                        <li>
+                            <a class="nav-link" href="/agenda">Agenda</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/vacas">Vacas</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/relatorios">Relatórios</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/tipos_evento">Tipos de Eventos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/empresa">Empresa</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('logout') }}"
+                               onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                                Sair
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
-    </nav>
+        </nav>
+    @endauth
 
     <div class="container mt-4">
         @yield('content')
