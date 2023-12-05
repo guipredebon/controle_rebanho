@@ -6,6 +6,8 @@ use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\TipoEventoController;
 use App\Http\Controllers\EventoController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\GrupoVacaController;
+
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,6 +26,10 @@ Route::get('/vacas/{vaca}', [VacasController::class, 'show'])->name('vacas.show'
 Route::get('/vacas/{vaca}/edit', [VacasController::class, 'edit'])->name('vacas.edit');
 Route::put('/vacas/{vaca}', [VacasController::class, 'update'])->name('vacas.update');
 Route::delete('/vacas/{vaca}', [VacasController::class, 'destroy'])->name('vacas.destroy');
+
+Route::post('/grupos', [VacasController::class, 'criarGrupo'])->name('grupos.create');
+Route::get('/opcoes/grupos-vacas', [GrupoVacaController::class, 'obterGruposVacas']);
+
 
 Route::get('/agenda', [AgendaController::class, 'index'])->name('agenda.index');
 Route::post('/salvarEvento', [AgendaController::class, 'salvarEvento']);

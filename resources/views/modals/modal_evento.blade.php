@@ -17,9 +17,13 @@
           <form id="eventoForm">
             <div class="form-group">
               <label for="vacaSelect">Selecione a Vaca</label>
-              <select class="form-control" id="vacaSelect" name="vaca_id">
-
-              </select>
+              <option value="" selected>Selecione</option>
+              <select class="form-control" id="vacaSelect" name="vaca_id"></select>
+            </div>
+            <div class="form-group">
+                <label for="grupoVacaSelect">Selecione o Grupo de Vacas</label>
+                <option value="" selected>Selecione</option>
+                <select class="form-control" id="grupoVacaSelect" name="grupo_vaca_id"></select>
             </div>
             <div class="form-group">
               <label for="tipoEventoSelect">Selecione o Tipo de Evento</label>

@@ -10,7 +10,7 @@
             </div>
             <div class="modal-body">
                 <p>Data: <span id="modalData"></span></p>
-                <!-- Completar -->
+                <p id="detalhesEvento"></p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="editarEvento">
@@ -20,7 +20,6 @@
                     <i class="fa fa-check"></i> Salvar
                 </button>
             </div>
-            
         </div>
     </div>
 </div>

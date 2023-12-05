@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Vaca;
+use App\Models\Grupo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 class VacasController extends Controller {
 
     public function index() {
-        $vacas = Vaca::all(); 
+        $vacas = Vaca::all();
         return view('vacas.index', ['vacas' => $vacas]);
     }
 
@@ -23,7 +25,7 @@ class VacasController extends Controller {
             'data_nascimento' => 'required|date',
             'raca' => 'required',
         ]);
-    
+
         Vaca::create($validatedData);
 
         return redirect()->route('vacas.index')->with('success', 'Vaca criada com sucesso!');
@@ -67,10 +69,31 @@ class VacasController extends Controller {
         return redirect('/vacas');
     }
 
-
-    // Remove uma Vaca com base em seu ID.
     public function destroy(Vaca $vaca) {
         $vaca->delete();
         return redirect('/vacas');
+    }
+
+    public function criarGrupo(Request $request) {
+        $vacasSelecionadas = $request->input('vacas');
+        $request->validate([
+            'nomeGrupo' => 'required|string|max:255',
+        ]);
+
+        try {
+            $nomeGrupo = $request->input('nomeGrupo');
+            $novoGrupo = Grupo::create([
+                'nome' => $nomeGrupo,
+            ]);
+
+            if (!empty($vacasSelecionadas)) {
+                $novoGrupo->vacas()->attach($vacasSelecionadas);
+            }
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            Log::error('Erro ao criar grupo: ' . $e->getMessage());
+            return response()->json(['error' => 'Erro ao criar grupo. Por favor, tente novamente.'], 500);
+        } 
     }
 }

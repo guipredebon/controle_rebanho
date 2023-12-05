@@ -13,18 +13,37 @@ class AgendaController extends Controller {
 
     public function getEventos() {
         try {
-            $eventos = Evento::with('tipo_evento', 'vacas')->get();
+            $eventos = Evento::with('tipo_evento', 'vacas', 'grupo_vaca')->get();
     
             $formattedEvents = [];
             foreach ($eventos as $evento) {
-                $formattedEvents[] = [
-                    'title' => $evento->tipo_evento->tipo_evento, 
-                    'start' => $evento->data,
-                    'extendedProps' => [
-                        'vaca' => $evento->vacas->nome,
-                        'nro_identificacao' => $evento->vacas->nro_identificacao
-                    ]
-                ];
+                if ($evento->vacas) {
+                    $vacaNome = $evento->vacas->nome;
+                } elseif ($evento->grupo_vaca) {
+                    $grupoVacaNome = $evento->grupo_vaca->nome;
+                }
+
+
+                if ($evento->vacas) {
+                    $formattedEvents[] = [
+                        'title' => $evento->tipo_evento->tipo_evento, 
+                        'start' => $evento->data,
+                        'extendedProps' => [
+                            'vaca' => $vacaNome,
+                            'nro_identificacao' => $evento->vacas->nro_identificacao,
+                            'observacoes' => $evento->observacoes
+                        ]
+                    ];
+                } elseif ($evento->grupo_vaca) {
+                    $formattedEvents[] = [
+                        'title' => $evento->tipo_evento->tipo_evento, 
+                        'start' => $evento->data,
+                        'extendedProps' => [
+                            'grupo_vaca' => $grupoVacaNome,
+                            'observacoes' => $evento->observacoes
+                        ]
+                    ];
+                }
             }
     
             return response()->json($formattedEvents);
@@ -33,24 +52,36 @@ class AgendaController extends Controller {
         }
     }
     
-
-
     public function salvarEvento(Request $request) {
         $request->validate([
             'data' => 'required|date',
-            'vacaId' => 'required|integer',
             'tipoEventoId' => 'required|integer',
             'observacoes' => 'nullable|string',
         ]);
-
+    
+        $vacaId = $request->input('vacaId');
+        $grupoVacaId = $request->input('grupoVacaId');
+    
+        if (!$vacaId && !$grupoVacaId) {
+            return response()->json(['error' => 'Forneça vacaId ou grupoVacaId.'], 400);
+        }
+    
         $evento = new Evento;
         $evento->data = $request->input('data');
-        $evento->animal_id = $request->input('vacaId');
         $evento->tipo_evento_id = $request->input('tipoEventoId');
         $evento->observacoes = $request->input('observacoes');
-
+    
+        if ($vacaId) {
+            $evento->animal_id = $vacaId;
+            $evento->grupo_vaca_id = null;
+        } elseif ($grupoVacaId) {
+            $evento->grupo_vaca_id = $grupoVacaId;
+            $evento->animal_id = null;
+        }
+    
         $evento->save();
-
+    
         return response()->json(['message' => 'Evento salvo com sucesso']);
     }
+    
 }

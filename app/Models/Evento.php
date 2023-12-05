@@ -17,4 +17,8 @@ class Evento extends Model {
     public function tipo_evento() {
         return $this->belongsTo(TipoEvento::class, 'tipo_evento_id');
     }
+
+    public function grupo_vaca() {
+        return $this->belongsTo(Grupo::class, 'grupo_vaca_id');
+    }
 }

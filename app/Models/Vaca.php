@@ -20,4 +20,8 @@ class Vaca extends Model {
     public function eventos() {
         return $this->hasMany(Evento::class, 'animal_id');
     }
+
+    public function grupos() {
+        return $this->belongsToMany(Grupo::class, 'grupo_vaca', 'vaca_id', 'grupo_id');
+    }
 }
