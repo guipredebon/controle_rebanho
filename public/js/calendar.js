@@ -20,11 +20,12 @@ document.addEventListener('DOMContentLoaded', function () {
             var title = info.event.title;
             var vaca = info.event.extendedProps.vaca;
             var grupoVaca = info.event.extendedProps.grupo_vaca;
+            var numeroIdentificacao = vaca ? info.event.extendedProps.nro_identificacao : null;
 
             var tooltipText = 'Evento: ' + title;
 
             if (vaca) {
-                tooltipText += '<br>Vaca: ' + vaca;
+                tooltipText += '<br>Nro. Identificador: ' + numeroIdentificacao +'<br>Vaca: ' + vaca;
             } else if (grupoVaca) {
                 tooltipText += '<br>Grupo: ' + grupoVaca;
             }
@@ -56,11 +57,12 @@ document.addEventListener('DOMContentLoaded', function () {
             var vaca = event.extendedProps.vaca;
             var grupoVaca = event.extendedProps.grupo_vaca;
             var observacoes = event.extendedProps.observacoes;
+            var numeroIdentificacao = event.extendedProps.nro_identificacao;
 
             var detalhesEvento = '';
 
             if (vaca) {
-                detalhesEvento += 'Vaca: ' + vaca + '<br>';
+                detalhesEvento += 'Nro. Identificador: ' + numeroIdentificacao + '<br>Vaca: ' + vaca;
             } else if (grupoVaca) {
                 detalhesEvento += 'Grupo: ' + grupoVaca + '<br>';
             }
