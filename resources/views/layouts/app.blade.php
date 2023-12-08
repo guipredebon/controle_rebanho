@@ -46,11 +46,14 @@
                         <li class="nav-item">
                             <a class="nav-link" href="/vacas">Vacas</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/relatorios">Relatórios</a>
+                        <li>
+                            <a class="nav-link" href="/grupos">Grupo de Vacas</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/tipos_evento">Tipos de Eventos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/relatorios">Relatórios</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/empresa">Empresa</a>

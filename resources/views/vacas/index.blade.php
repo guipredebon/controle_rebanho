@@ -156,6 +156,9 @@
             .then(response => response.json())
             .then(data => {
                 console.log('Resposta do Servidor:', data);
+                if (data.success) {
+                    alert('Grupo criado com sucesso!');
+                }
             })
             .catch(error => {
                 console.error('Erro ao enviar dados para o servidor:', error);

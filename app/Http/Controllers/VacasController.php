@@ -92,7 +92,6 @@ class VacasController extends Controller {
 
             return response()->json(['success' => true]);
         } catch (\Exception $e) {
-            Log::error('Erro ao criar grupo: ' . $e->getMessage());
             return response()->json(['error' => 'Erro ao criar grupo. Por favor, tente novamente.'], 500);
         } 
     }
